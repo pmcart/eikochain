@@ -1,0 +1,270 @@
+﻿@{
+    ViewData["Title"] = "Add New Supply Chain";
+}
+
+@model EikochainV1.Models.SupplyChain
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/editor.css" asp-append-version="true" />
+}
+
+<div class="row">
+
+    <input type="hidden" id="ProductID" value="@ViewBag.ProductId" />
+    <input type="hidden" id="ActiveEndpoint" value="1" />
+    <input type="hidden" id="SupplyChainData" value="@Model.SupplyChainData" />
+
+    <div class="col-md-2 shadow p-3 mb-5 bg-white rounded">
+        <div class="editor-menu">
+            <div class="row editor-menu-row">
+                <button id="saveBtn" type="button" class="btn btn-outline-primary" data-mdb-ripple-color="dark">Save</button>
+                <button id="previewBtn" type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark">Preview</button>
+                <button id="generateQrBtn" class="btn btn-success">Generate QR</button>
+            </div>
+            <div class="row editor-menu-row">
+                <div class="btn-group shadow-0" role="group" aria-label="Basic example">
+                    <button id="btnSmallSize" type="button" class="btn btn-sm btn-outline-secondary btnSizer" data-mdb-color="dark">S</button>
+                    <button id="btnMedSize" class="btn btn-sm btn-outline-secondary active btnSizer" data-mdb-color="dark">M</button>
+                    <button id="btnLargeSize" class="btn btn-sm btn-outline-secondary btnSizer" data-mdb-color="dark">L</button>
+                </div>
+                <p>Choose a display size</p>
+            </div>
+            <div class="row editor-menu-row">
+                <div class="col-md-12 ">
+                    <button id="btnAddStep" type="button" class="btn btn-primary">
+                        <i class="far fa-plus-square editor-menu-action"></i>
+                    </button>
+                    <p> Add New Step</p>
+                </div>
+
+
+            </div>
+            <div class="row editor-menu-row ">
+                <div class="col-md-12">
+                    <button id="btnAddImage" type="button" class="btn btn-primary">
+                        <i class="far fa-images editor-menu-action"></i>
+                    </button>
+                    <p>   Add New Image</p>
+                </div>
+
+
+            </div>
+            <div class="row editor-menu-row ">
+
+
+                <div class="col-md-12">
+                    <button id="btnAddText" type="button" class="btn btn-primary">
+                        <i class="fas fa-paragraph editor-menu-action"></i>
+                    </button>
+                    <p>  Add New Text</p>
+                </div>
+
+
+            </div>
+            <div class="row editor-menu-row ">
+                <div class="col-md-12">
+                    <button id="btnAddVideo" type="button" class="btn btn-primary">
+                        <i class="fas fa-video editor-menu-action"></i>
+                    </button>
+                    <p>Add New Video</p>
+                </div>
+
+
+            </div>
+            <div class="row editor-menu-row ">
+                <div class="col-md-12">
+                    <button id="btnAddImageLogo" type="button" class="btn btn-primary">
+                        <i class="far fa-compass editor-menu-action"></i>
+                    </button>
+                    <p>   Add Custom Logo</p>
+                </div>
+
+
+            </div>
+
+            <div class="row editor-menu-row ">
+                <div class="col-md-12">
+                    <p>Slider Menu Color</p>
+                    <div id="picker"></div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+        @*<h4>Choose a popup size</h4>
+            <div class="btn-group shadow-0" role="group" aria-label="Basic example">
+                <button id="btnSmallSize" type="button" class="btn btn-sm btn-outline-secondary" data-mdb-color="dark">Small</button>
+                <button id="btnMedSize" class="btn btn-sm btn-outline-secondary" data-mdb-color="dark">Medium</button>
+                <button id="btnLargeSize" class="btn btn-sm btn-outline-secondary" data-mdb-color="dark">Large</button>
+            </div>
+            <div>
+                <button id="btnAddStep" class="btn btn-primary" data-mdb-color="dark">Add New Chain Step</button>
+                <button id="btnAddImage" class="btn btn-primary" data-mdb-color="dark">Add New Image</button>
+                <button id="btnAddText" class="btn btn-primary" data-mdb-color="dark">Add New Text</button>
+                <button id="btnAddVideo" class="btn btn-primary" data-mdb-color="dark">Add New Video</button>
+            </div>*@
+    </div>
+
+    <div class="col-md-10">
+        <div class="form-group col-md-6">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" value="@Model.Title">
+         
+        </div>
+        
+        <ul class="nav nav-tabs mb-3" id="myStepTabs" role="tablist">
+
+            @*<li class="nav-item" role="presentation">
+                    <button class="nav-link"
+                            id="header-step1"
+                            data-mdb-toggle="tab"
+                            data-mdb-target="tab-step1"
+                            type="button"
+                            role="tab"
+                            aria-controls="contact"
+                            aria-selected="false">
+                        Step1
+                    </button>
+                </li>*@
+        </ul>
+        <div class="tab-content white-box" id="gridContainer">
+            @*<div class="tab-pane fade show active dropzone drop-outer"
+                id="tab-step1"
+                role="tabpanel"
+                aria-labelledby="home-tab0" style="display:flex !important">*@
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="exampleModalLabel1">QR Code</h4>
+            </div>
+            <div id="frmProductUrl">
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" id="UrlProductID" name="ProductID">
+                    <div class="form-group" style="text-align:center;">
+                        <img id="imgQrCode" width="200" height="200" src="" alt="qr code" />
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnPreviewQR">Preview</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal  bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @*<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+                </div>*@
+            <div class="modal-body">
+                <textarea class='form-control fixborder' id="endpointTexteditor" name='postDesc[]' placeholder='File description' style="width:100%"></textarea>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary waves-effect text-left jsAddText">Add</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<div class="modal fade" id="addStepModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="exampleModalLabel1">New Step</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">Step name:</label>
+                    <input type="text" id="newStepName" class="form-control" name="StepName">
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="btnConfirmNewStep">Add</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="PreviewDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" id="PreviewDialogInner" role="document">
+        <div class="modal-content row" style="display: flex; flex-direction: row;">
+            <div id="sideMenu" class="col-md-3">
+            </div>
+            <div id="gridContainerModal" class="col-md-9">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--<div class="modal fade previewModal" id="PreviewDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-preview-content">-->
+@*<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="exampleModalLabel1"></h4>
+    </div>*@
+
+<!--<div class="modal-body">
+
+
+</div>-->
+@*<div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+    </div>*@
+
+<!--</div>
+    </div>
+</div>-->
+
+
+<input type="file" class="jsfileImage" style="display:none" />
+<input type="file" class="jsfileImageLogo" style="display:none" />
+<form enctype="multipart/form-data">
+    <input type="file" class="jsfileVideo" style="display:none" />
+</form>
+
+
+
+
+@section Scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/&#64;jaames/iro&#64;5"></script>
+    <script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="~/js/step-editor.js"></script>
+
+}

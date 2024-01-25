@@ -1,0 +1,140 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<style>
+.form-floating>label {
+    color: #959ca9;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: .75rem;
+    cursor: pointer;
+}
+
+#forgot-password:hover {
+    text-decoration: underline
+}
+
+.form-floating>.form-control 
+{
+  padding: 0.25rem 0.75rem 0.5rem 0.75rem;
+}
+
+.form-floating>.form-control 
+{
+  height: calc(3rem + 2px);
+  line-height: 1;
+}
+
+.form-floating>label {
+  padding: 0.75rem 0.75rem;
+}
+
+h2 {
+    font-size: calc(1.255rem + .06vw);
+}
+
+.container-fluid {
+    padding: 0px;
+}
+</style>
+
+
+<section class="wrapper bg-dark" style="min-height: 40vh; margin-bottom: -40vh">
+      <div class="container">
+        
+      </div>
+</section>
+
+<section class="container d-flex align-items-center vh-100" >           
+
+    <div class="row d-flex my-4 justify-content-center">
+    <div class="col-12 col-xs-10 col-sm-10 col-lg-9  ">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-6 text-white mb-4 text-center">Log In</h1>
+            </div>
+        </div>
+            
+        <div class="row">
+        <div class="card rounded-6 shadow-lg mt-n19" style="background-color: #fdf9f0;"> 
+            <div class="row">
+
+                <div class="col-lg-6 col-md-5 d-flex align-items-center border-end">
+                    <img class="w-100" src="/eikochainlogo4.png" />                
+                </div>   
+                <!-- ./ col left side-->
+                
+                <div class="col-lg-6  col-md-5 card-body border-start">                       
+                    <h2 class="mb-3 text-start fw-bold" style="letter-spacing: .5px;">Welcome Back</h2>
+                    <div class="lead mb-1 text-start">Fill in your email and password.</div>
+
+                    <form id="account" method="post">
+                        <div style="min-height: 26px;" asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-floating ">
+                            <input asp-for="Input.Email" id="email" class="form-control" placeholder="Email" required autofocus />
+                            <label for="email">Email</label>                    
+                        </div>
+
+                        <div style="min-height: 35px">
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                
+                        <div class="form-floating ">
+                            <input asp-for="Input.Password" type="password" id="password" class="form-control" placeholder="Password" required />                     
+                            <i class="password-toggle far fa-eye"></i>
+                            <label for="login">Password</label>                    
+                        </div>
+
+                        <div style="min-height: 35px;">
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                     
+                        <div class="form-group">                    
+                        <div class="row mb-3">
+                                <div class="col-md-6">
+                                <label class="text-start" role="button" asp-for="Input.RememberMe">
+                                <input class="form-check-input me-0" asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
+                                </div> 
+                         
+                            <div class="col-md-6 text-end">
+                                <a id="forgot-password" class="" asp-page="./ForgotPassword">Forgot password?</a>
+                            </div>                    
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary w-100 rounded-pill">Log In</button>                    
+                        </div>
+                    </form>
+                    <div class="row" >           
+                        @*   <p class="col-12">
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        </p>*@
+                    </div>
+                </div>
+                <!-- ./ col right side-->
+            </div>
+            <!-- ./ row-->
+        </div>
+        <!-- ./card -->
+        </div>
+        <!-- .row-->
+    </div>
+    <!-- ./col-->
+    </div>
+    <!-- ./row-->
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

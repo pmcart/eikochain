@@ -1,0 +1,195 @@
+﻿@{
+    ViewData["Title"] = "Supply Chains";
+}
+@model List<EikochainUser>
+        
+<table id="usersDatatable">
+    <thead>
+        <tr>
+               <th>
+                Actions
+            </th>
+      
+            <th>
+                Name
+            </th>
+                  <th>
+                Email
+            </th>
+                   <th>
+                Role
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var b in Model)
+        {
+            <tr>
+                <td>
+                    <button class="btn btn-primary btn-product" title="Edit" id="btnEditUser" data-user="@b.Email"><i class="fa-solid fa-pen-to-square"></i></button>
+
+                    @if (ViewBag.IsSuper)
+                    {
+                    <button class="btn btn-primary btn-product" title="Reset" id="btnResetPassword" data-user="@b.Email"><i class="fa-solid fa-lock"></i></button>
+                    <button class="btn btn-primary btn-product" title="Delete" id="btnDeleteUser" data-user="@b.Email"><i class="fa-solid fa-trash-can"></i></button>
+                    }
+                  
+
+                </td>
+                  <td>
+                      @Html.DisplayFor(modelItem => b.FirstName)
+                     
+                                            @Html.DisplayFor(modelItem => b.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => b.Email)
+                </td>
+                     <td>
+                     @foreach (var userRole in b.UserRoles)
+                    {
+                        <p>@Html.DisplayFor(modelItem=>userRole.Role.Name)&nbsp;</p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    <div> <button id="addUserDialog" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDialog" data-whatever="">Add New User</button></div>
+
+<div class="modal fade" id="AddDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="exampleModalLabel1">New User</h4>
+            </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">First name:</label>
+                        <input type="text" class="form-control" name="FirstName" id="firstNameInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Last name:</label>
+                        <input type="text" class="form-control" name="LastName" id="lastNameInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Email:</label>
+                        <input type="text" class="form-control" name="Email" id="emailInput">
+                    </div>
+@*                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Phone:</label>
+                        <input type="text" class="form-control" name="Phone" id="phoneInput">
+                    </div>*@
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Role:</label>
+                        <select class="form-control" id="RoleID" name="RoleID">
+                         
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btnCloseModal" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnAddNewUser">Add</button>
+                </div>
+    
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="exampleModalLabel1">Update User</h4>
+            </div>
+            <form id="UpdateForm" method="post">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">First name:</label>
+                        <input type="text" class="form-control" id="FirstName" name="FirstName">
+                        <input type="hidden" id="AdminUserID" name="AdminUserID" />
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Last name:</label>
+                        <input type="text" class="form-control" id="LastName" name="LastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Email:</label>
+                        <input type="text" class="form-control" id="Email" name="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Phone:</label>
+                        <input type="text" class="form-control" id="Phone" name="Phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Role:</label>
+                        <select class="form-control" id="EditRoleID" name="RoleID">
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ResetPasswordDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            
+                <h4 class="modal-title" id="exampleModalLabel1">Reset Password for <strong id="targetEmailString"></strong></h4>
+            </div>
+           
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="resetPasswordConfirm" class="control-label">Are you sure?</label>
+                        <button class="btn btn-primary" id="resetPasswordConfirm" name="resetPasswordConfirm" >Proceed</button>
+                          <button class="btn btn-primary close" id="cancelPasswordBtn" name="cancelPasswordBtn" >Cancel</button>
+                    </div>
+
+                </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="DeleteUserDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            
+                <h4 class="modal-title" id="exampleModalLabel1">Delete User <strong id="targetUserDelete"></strong></h4>
+            </div>
+           
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="deleteUserConfirm" class="control-label">Are you sure?</label>
+                        <button class="btn btn-primary" id="deleteUserConfirm" name="deleteUserConfirm" >Proceed</button>
+                          <button class="btn btn-primary close" id="cancelDeleteUser" name="cancelDeleteUser" >Cancel</button>
+                    </div>
+
+                </div>
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/users.js?version=@DateTime.Now"></script>
+}

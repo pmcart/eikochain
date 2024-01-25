@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Edit Supply Chain";
+}
+
+@model EikochainV1.Models.SupplyChain
+@section Styles
+{
+     <link rel="stylesheet" href="~/css/editor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/js/thirdparty/grapick/grapick.css" />
+      <link rel="stylesheet" href="~/js/thirdparty/fontselector/jquery.fontselect.css" />
+      <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/huebee@2/dist/huebee.min.css">
+}
+
+<div class="row">
+
+    <input type="hidden" id="SupplyChainId" value="@Model.Id" />
+    <input type="hidden" id="ActiveEndpoint" value="1" />
+    <input type="hidden" id="SupplyChainData" value="@Model.SupplyChainData" />
+
+  <partial name="_EditorPartial" model="@Model" />
+@section Scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/&#64;jaames/iro&#64;5"></script>
+    <script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <script src="~/js/thirdparty/grapick/grapick.js"></script>
+        <script src="https://unpkg.com/huebee@2/dist/huebee.pkgd.min.js"></script>
+        <script src="~/js/thirdparty/draggablebackground.js"></script>
+           <script src="~/js/thirdparty/fontselector/jquery.fontselect.js"></script>
+        <script src="~/js/thirdparty/sortable/sortable.min.js"></script>
+           <script src="~/js/step-editor.js"></script>
+}
+</div>

@@ -1,0 +1,231 @@
+﻿@model IEnumerable<Integration>
+
+@{
+    ViewBag.Title = "Integrations";
+}
+<style>
+    #shopifyModalBody {
+        max-height: 400px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .productRow {
+        height: 80px;
+        padding: 10px 0px;
+        overflow-y: hidden;
+        border-bottom: 1px solid #eee;
+    }
+
+    input[type='checkbox'] {
+
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+        border: 2px solid #555;
+    }
+
+</style>
+
+<table class="table table-striped" id="integrationsDatatable">
+    <thead>
+        <tr>
+               <th>
+                Actions
+            </th>
+              <th>
+                Url
+            </th>
+            <th>
+                Type
+            </th>
+               <th>
+                Embed Code
+            </th>
+          
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var b in Model)
+        {
+            <tr class="integrationRow" id="@b.Id">
+                <td style="white-space: nowrap;">
+                 <button class="btn btn-danger btn-product" data-intid="@b.Id" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+                      <td>
+                    @Html.DisplayFor(modelItem => b.Url)
+                </td>
+                     <td>
+                    @Html.DisplayFor(modelItem => b.Type)
+                </td>
+                   <td>
+                    <button class="btn btn-danger btn-product btnGenerateEmbedCode" data-intid="@b.Id" title="Embed Code"><i class="fa-solid fa-plus"></i> Get Embed Code</button>   
+                </td>
+         
+    
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button class="btn btn-primary" id="btnIntegrationAdd">Add New Integration</button>
+
+<div class="modal fade" id="AddIntModal" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+             @*   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>*@
+                <h4 class="modal-title" id="exampleModalLabel1">Generate an embed code</h4>
+                 
+            </div>
+           
+        <div class="modal-body">
+       <div class="row">
+    <div class="col-md-4">
+        <div>
+            <img src="~/images/Shopify-Symbol.png" width="100" height="70" />
+        </div>
+    </div>
+    <div class="col-md-8">
+     
+        <div class="form-group">
+            <label for="shopifyURL">Your Shopify URL</label>
+            <input type="text" class="form-control" id="shopifyURL" placeholder="">
+            <br />
+           @* <div class="f-group-append">
+                <button id="btnAuthShopify" style="align-self: end;" class="btn btn-primary btn-lg">Authorize Eikochain</button>
+            </div>*@
+            <br />
+
+            <div class="f-group-append">
+                <button id="btnImportShopifyProducts" style="align-self: end;" class="btn btn-primary btn-lg"><span class="spinner-border spinner-border-sm" style="display: none;" role="status" aria-hidden="true"></span> Import All Products</button>
+            </div>
+        </div>
+        <br />
+       @* <h2>Web Integration Button</h2>
+            <div class="form-group" id="testdiv">
+
+                   </div>*@
+    </div>
+    
+
+  
+ </div>
+ <br />
+ <br />
+ <div class="row">
+    <div class="col-md-4">
+        <div>
+            <img src="~/images/woocommerce.png" width="100" height="70" />
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="form-group">
+            <label for="wooURL">Your WooCommerce URL</label>
+            <input type="text" class="form-control" id="wooURL" placeholder="">
+            <br />
+           @* <div class="f-group-append">
+                <button id="btnAuthShopify" style="align-self: end;" class="btn btn-primary btn-lg">Authorize Eikochain</button>
+            </div>*@
+            <br />
+
+            <div class="f-group-append">
+                <button id="btnImportWooProducts" style="align-self: end;" class="btn btn-primary btn-lg"><span class="spinner-border spinner-border-sm" style="display: none;" role="status" aria-hidden="true"></span> Import All Products</button>
+            </div>
+        </div>
+        <br />
+       @* <h2>Web Integration Button</h2>
+            <div class="form-group" id="testdiv">
+
+                   </div>*@
+    </div>
+    
+
+  
+ </div>
+       </div>
+        
+        </div>
+    </div>
+</div>
+
+
+   <div class="modal fade" id="shopifyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="col-6">
+                        <h4 class="modal-title" id="exampleModalLabel">Shopify Products</h4>
+@*
+                        <div class="input-group">
+                          <div class="form-outline">
+                            <input type="search" id="searchInput" class="form-control" style="border: 1px solid #bdbdbd;"/>
+                            <label class="form-label" for="form1">Search</label>
+                          </div>                      
+                        </div>
+                        *@                    
+
+                        
+                    </div>
+                    <div class="col-6">                         
+                        <div class="input-group rounded">
+                          <input type="search" id="searchInput" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                          <span class="input-group-text border-1" id="search-addon">
+                            <i class="fas fa-search"></i>
+                          </span>
+                        </div>                           
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <div style="display: flex;">
+                        <div class="col-md-5 align-items-center d-flex">
+                            <h6 class='fw-bold productTitle'>Product Title</h6>
+                        </div>
+                        <div class="col-md-3 align-items-center d-flex">
+                            <h6 class='fw-bold productTitle'>Product Type</h6>
+                        </div>
+                        <div class="col-md-2 justify-content-center align-items-center d-flex">
+                            <h6 class='fw-bold productTitle'>Image</h6>
+                        </div>
+                        <div class="col-md-2 justify-content-center align-items-center d-flex">
+                            <h6 class='fw-bold productTitle'>Import</h6>
+                        </div>
+                    </div>
+                    <div  id="shopifyModalBody">
+
+                    </div>
+                </div>
+                <div class="modal-footer d-block">
+                    <div class="row"> 
+                        <div class="col-4">
+                             <div class="form-check" @*style="margin-top:10px;"*@>
+                                <label class="form-check-label" for="chkAll">
+                                    Select All
+                                </label>
+                                <input class="form-check-input" type="checkbox" value="" id="chkAll">                                
+                            </div>
+                        </div>
+                        <div class="col-8 ">
+                            <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>&nbsp;&nbsp;
+                            <button type="button" class="btn btn-primary" id="btnConfirmShopify">Import</button>
+                            </div>
+                        </div>
+                   </div>
+
+               
+                </div>
+            </div>
+        </div>
+      
+    </div>
+
+                    
+ <script id="eikochainjs" data-productid="fd36ef91-6bc7-4d33-85b4-553895db56f7" data-target="testdiv" data-styles="" src="https://eikochaincdn.blob.core.windows.net/scripts/eikochainweb.js"></script>
+
+
+@section Scripts
+{
+    <script src="~/js/integrations.js?version=@DateTime.Now"></script>
+}

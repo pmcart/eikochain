@@ -1,0 +1,577 @@
+.view-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebarCollapse {
+    position: absolute;
+    /* width: 50px; */
+    /* background-color: transparent; */
+    /* box-shadow: none; */
+    z-index: 9999;
+    font-size: 24px !important;
+    /* border: 3px solid cornflowerblue; */
+    /* background-color: black !important; */
+    /* padding: 2px; */
+    margin: 15px;
+    left: 0;
+}
+
+#stepContainerLogo {
+    width: 50% !important;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#sidebar {
+    background: linear-gradient(to right top, #051937, #002d3e, #1d3d3f, #3e4c45, #595a57);
+    padding-top: 10%;
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* top layer */
+    z-index: 9998;
+}
+
+#sidebarUl {
+    margin-left: 10%;
+    margin-top: 10%;
+    display: block !important;
+}
+
+#sidebarUl li button {
+    border: none;
+    color: white;
+    background-color: transparent !important;
+    position: relative;
+    overflow-wrap: break-word;
+    text-transform: none !important;
+}
+#sidebarUl li .active {
+    border-bottom: 1px solid;
+    border-color: #1266f1;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+
+        #sidebar.active {
+            margin-left: 0;
+        }
+}
+
+.stepContainerRow {
+    min-height: 100px;
+   
+    margin-left: 0px;
+    max-width: 100%;
+    /*position: relative;*/
+    margin-bottom: 10px;
+    display: flex;
+    overflow: auto;
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+#titleText {
+    display: table;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-family: system-ui;
+}
+
+#titleText p:last-of-type {
+    margin-bottom: 0;
+}
+
+.textItem p:last-of-type {
+    margin-bottom: 12.5px;
+}
+
+.stepContainerCol {
+    padding: 2px;
+    height: auto !important;
+}
+
+.stepColInner {
+    position: relative;
+    height: auto;
+    overflow-wrap: break-word;
+}
+
+.resizable {
+    transition: width 1s ease-in-out;
+}
+
+.stepContainer {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+
+.step-card {
+    min-height: 400px;
+}
+
+.layout-img {
+}
+
+#previewModalContent {
+    border-radius: 0px;
+    width: 700px;
+}
+
+#stepsContainer {
+    width: 600px;
+}
+
+#stepsContainerLogo {
+    width: 100%;
+}
+
+.stepsContainerSide {
+    text-align:center;
+    background: linear-gradient(to right top, #051937, #002d3e, #1d3d3f, #3e4c45, #595a57);
+}
+
+#stepTabs .nav-link {
+    color: white;
+    background-color: transparent !important;
+    position: relative;
+    overflow-wrap: break-word;
+    text-transform: none !important;
+}
+
+
+.stepsContainerMain {
+    padding-left: 0px;
+    padding-right: 0px;
+    max-height: 550px;
+ 
+    overflow-x: clip;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.step-img {
+    width: 100%;
+}
+
+.resizableImg {
+    width: 100%;
+    height: 100%;
+}
+
+.step-video {
+    width: 100%;
+}
+
+.topBanner {
+    background-image: url(../images/layoutimages/cups.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.editIcon {
+    position: absolute;
+    top: 5px;
+    right: 0px;
+}
+
+.editIconAbs {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.topBannerImg {
+    height: 100%;
+    width: 100%;
+}
+
+.bottomBanner {
+    background-image: url(../images/layoutimages/city.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.layoutBlock {
+    padding: 10px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.layout-img-selected {
+    border: 1px solid blue;
+}
+
+.logoImg {
+    width: 140px;
+    height: 80px;
+    padding: 10px;
+}
+
+.modal-editcolors {
+    width: 20%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+}
+
+.tab-pane {
+}
+
+.addToRowBtn {
+    /*  position: absolute;
+    left: 100%;
+    max-width: 55px;
+    top: 0px;*/
+    float: right;
+    font-size: 36px;
+    color: red;
+    margin-left: 520px;
+    position: absolute;
+}
+
+.rowDeleteBtn {
+    /*  position: absolute;
+    left: 100%;
+    max-width: 55px;
+    top: 0px;*/
+    float: right;
+    font-size: 36px;
+    color: red;
+    margin-left: 565px;
+    position: absolute;
+}
+
+.arrowRowBtnUp {
+    float: right;
+    font-size: 24px;
+    color: black;
+    margin-left: 530px;
+    margin-top: 42px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.arrowRowBtnDown {
+    float: right;
+    font-size: 24px;
+    color: black;
+    margin-left: 530px;
+    margin-top: 70px;
+    position: absolute;
+    cursor: pointer;
+}
+
+#tabBodyContainer {
+}
+
+#mainBodySection {
+    max-width: 700px;
+    min-height: 500px;
+    margin-left: 5px;
+}
+
+.mainBodySection {
+    max-width: 100% !important;
+    min-width: 100%;
+    min-height: auto !important;
+    margin-left: 0px !important;
+    margin-top: 10px !important;
+}
+
+.previewModal {
+    top: 50px;
+    height: 600px;
+}
+
+#previewModalContent .stepColInner {
+    border: none !important;
+}
+
+#previewModalContent .stepContainerRow {
+    border: none !important;
+}
+
+#iframeSupplyChain {
+    box-shadow: 0 10px 20px rgb(0 0 0 / 20%);
+    border-radius: 10px;
+    height: 500px !important;
+}
+
+.modal-preview-content {
+    background-color: transparent;
+    border: 0px;
+}
+
+.grid-stack-item {
+    border: 0;
+}
+
+.grid-stack-item-content {
+    background-color: white;
+    text-align: center;
+}
+
+.previewModal h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+#previewModalRow {
+    min-height: 500px;
+}
+
+.previewModal .card {
+    background: none;
+}
+
+.previewModal section {
+    padding: 0 15px 0 15px;
+}
+
+.grid-stack-item-removing {
+    opacity: 0.8;
+    filter: blur(5px);
+}
+
+@@media all and (max-width: 575px) {
+    .previewModal #hero {
+        margin-top: 32px;
+    }
+}
+
+.previewModal .logo {
+    display: inline;
+    margin-right: 15px;
+}
+
+.previewModal #trash {
+    background-color: #cc6857;
+}
+
+.newWidget > .grid-stack-item-content {
+    background-color: #6cad84;
+    left: 0px;
+    right: 0px;
+}
+
+.grid-stack-item-content {
+    left: 3px;
+    right: 3px;
+}
+
+@@media (min-width: 768px) {
+    .previewModal .navbar-right {
+        float: right !important;
+        margin-right: 0px;
+    }
+}
+
+.previewModal .navbar {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0.0rem 0rem;
+}
+
+.previewModal .nav > li > a {
+    position: relative;
+    display: block;
+    padding: 0px 15px;
+}
+
+body {
+    max-height:1000px;
+}
+
+#gridContainer {
+    width: 500px;
+    height: 500px;
+}
+
+.btn-floating {
+    border-radius: 50%;
+    padding: 0;
+    position: relative;
+    width: 3.3125rem;
+    height: 3.3125rem;
+    text-align: center;
+}
+
+.stepImg {
+    height: 100%;
+    width: 100%;
+}
+
+.editor-menu {
+    background-color: white;
+    height: 100%;
+}
+
+.editor-menu-action {
+    font-size: 18px;
+}
+
+.editor-action-row-text {
+    text-align: left;
+    align-self: center;
+}
+
+.editor-menu-row {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+    .editor-menu-row .btn {
+        margin-bottom: 20px;
+    }
+
+
+.resize-drag {
+    width: 120px;
+    border-radius: 8px;
+    /*  padding: 20px;*/
+    margin: 1rem;
+    /*          background-color: #29e;*/
+    font-size: 20px;
+    font-family: sans-serif;
+    touch-action: none;
+    /* This makes things *much* easier */
+    box-sizing: border-box;
+}
+
+.drop-outer {
+    height: 100%;
+}
+
+.drop-inner {
+    height: 80px;
+}
+
+.modal .dropzone {
+    /*        background-color: #bfe4ff;*/
+    border: dashed 4px transparent;
+    border-radius: 4px;
+    margin: 10px auto 30px;
+    padding: 10px;
+    width: 100%;
+    background-image: none;
+    overflow-y: hidden;
+}
+
+.modal .drag-drop {
+    border: none !important;
+}
+
+.modal #sideMenu {
+    background-color: darkcyan;
+}
+
+.dropzone {
+    /*        background-color: #bfe4ff;*/
+    border: dashed 4px transparent;
+    border-radius: 4px;
+    margin: 10px auto 30px;
+    padding: 10px;
+    width: 100%;
+    transition: background-color 0.3s;
+    background-image: repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%), repeating-linear-gradient( 90deg, #ccc 0 1px, transparent 1px 100%);
+    background-size: 66px 70px;
+}
+
+.drop-active {
+    border-color: #aaa;
+}
+
+.drop-target {
+    background-color: #29e;
+    border-color: #fff;
+    border-style: solid;
+}
+
+.drag-drop {
+    height: 200px;
+    /*       display: inline-block;*/
+    min-width: 80px;
+    /*  padding: 2em 0.5em;*/
+    margin: 1rem 0 0 1rem;
+    /*  background-color: #29e;*/
+    border: solid 2px grey;
+    touch-action: none;
+    transform: translate(0px, 0px);
+    transition: background-color 0.3s;
+    overflow-wrap: break-word;
+}
+
+    .drag-drop.can-drop {
+        color: #000;
+    }
+
+.delete-item-icon {
+    cursor: pointer;
+}
+
+#sideMenu {
+    max-width: 200px;
+}
+
+.previewMenuItem {
+    list-style: none;
+    color: white;
+    font-size: 24px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+    .previewMenuItem:hover {
+        color: grey;
+        font-size: 25px;
+        text-shadow: 2px 2px 5px fuchsia;
+    }
+
+/*#PreviewDialogInner{
+            max-width:1000px;
+        }*/
+
+.txtItem {
+    display: inline-block;
+    height: min-content !important;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+}
+
+.video-container iframe {
+    position: absolute;
+}

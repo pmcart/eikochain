@@ -1,0 +1,144 @@
+﻿@model IEnumerable<EikoQrCode>
+@{
+    ViewData["Title"] = "Qr Codes";
+}
+
+<table  class="table table-striped" id="scDatatable">
+    <thead>
+        <tr>
+               <th>
+                Actions
+            </th>
+      
+            <th>
+                Assigned To
+            </th>
+
+            <th>
+                Previously Assigned To
+            </th>
+
+
+                 @* <th>
+                Url
+            </th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var b in Model)
+        {
+            <tr>
+                <td>
+
+                    <button class="btn btn-success btn-product" data-qrid="@b.Id" id="viewQrCode" title="Edit"><i class="fa-solid fa-display"></i></button>
+                    @if(b.SupplyChainId == null)
+                    {
+                    <button data-qid="@b.Id" id="btnReassignQrCode" class="btn btn-danger btn-product btnReassignQrCode" title="Update"><i class="fa-solid fa-pen-to-square"></i></button>
+                  @*  <button data-productid="@b.Id" class="btn btn-danger btn-product btnDeleteProduct" title="Delete"><i class="fa-solid fa-trash-can"></i></button>*@
+                    }  
+              </td>
+                  <td>
+                    @if(b.SupplyChainId != null)
+                    {
+                        @Html.DisplayFor(modelItem => b.Description)
+                    }
+                    else
+                    {
+                        <p>No Supply Chain Assigned</p>
+                    }
+                </td>
+                <td>
+                     @if(b.SupplyChainId == null)
+                    {
+                        @Html.DisplayFor(modelItem => b.Description)
+                    }
+                    else
+                    {
+                        @if(b.PreviousDescription != null)
+                        {
+                            <p>@b.PreviousDescription</p>
+                        }
+                        else
+                        {
+                              <p>N/A</p> 
+                        }
+                    
+                    }
+                </td>
+
+               @* <td>
+                    @Html.DisplayFor(modelItem => b.Url)
+                </td>
+              *@
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="row text-right">
+   @* <div class="col-md-12">
+      <a class="btn btn-primary" asp-controller="SupplyChains"
+   asp-action="Add">Add New SupplyChain</a>
+    </div>*@
+</div>
+
+<div class="modal fade" id="SelectScModal" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+             @*   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>*@
+                <h4 class="modal-title" id="exampleModalLabel1">Select a Supply Chain</h4>
+                 
+            </div>
+           
+        <div class="modal-body">
+         
+              <ul class="list-group list-group-flush" id="supplyChainList">
+                </ul>
+                <hr />
+                                  <button class="btn btn-success" id="selectScBtn">Select</button>
+                           
+                <button class="btn btn-outline-dark closeModal" id="closeModal">Cancel</button>
+
+                  
+         
+            </div>
+         @*   <div style="padding: 20px;">
+                            <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <label class="form-check-label" for="flexCheckDefault">Assign To All Products</label>
+                </div>
+            </div>*@
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">                
+                <h4 class="modal-title" id="exampleModalLabel1">QR Code</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="frmProductUrl">
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" id="UrlProductID" name="ProductID">
+                    <div class="form-group" style="text-align:center;">
+                        <img id="imgQrCode" width="200" height="200" alt="qr code" />
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <a class="btn btn-success" id="downloadQrCode" download="Eikochain QR.png" role="button"><i class="fas fa-download"></i></a>                       
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="selectedQrCode" value="" type="hidden" />
+@section Scripts
+{
+    <script src="~/js/qrcodes.js"></script>
+}

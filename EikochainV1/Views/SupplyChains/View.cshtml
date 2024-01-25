@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Eikochain";
+}
+@{
+    Layout = "_LayoutPreview";
+}
+
+@model EikochainV1.Models.SupplyChain
+@section Styles
+{
+     <link rel="stylesheet" href="~/css/preview.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/js/thirdparty/grapick/grapick.css" />
+      <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+}
+
+<div class="">
+
+    <input type="hidden" id="SupplyChainId" value="@Model.Id" />
+    <input type="hidden" id="ActiveEndpoint" value="1" />
+    <input type="hidden" id="SupplyChainData" value="@Model.CurrentPreviewData" />
+
+    <div class="view-wrapper">
+        <nav id="sidebar">
+        <ul class="nav nav-tabs" id="sidebarUl"></ul>
+        </nav>
+    
+                <i class="fas fa-bars" id="sidebarCollapse"></i>
+         @*       <span>Toggle Sidebar</span>*@
+               <div id="mainBodySection" class="row mainBodySection ">
+    </div>
+    </div>
+ 
+
+</div>
+@section Scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/&#64;jaames/iro&#64;5"></script>
+    <script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <script src="~/js/thirdparty/grapick/grapick.js"></script>
+      <script src="~/js/thirdparty/copycss.js"></script>
+
+    <script src="~/js/step-editor.js"></script>
+              <script src="~/js/mobilemenu.js"></script>
+
+}

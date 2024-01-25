@@ -1,0 +1,56 @@
+﻿@model IEnumerable<SupplyChain>
+@{
+    ViewData["Title"] = "Supply Chains";
+}
+
+<table  class="table table-striped" id="scDatatable">
+    <thead>
+        <tr>
+               <th>
+                Actions
+            </th>
+      
+            <th>
+                Title
+            </th>
+            <th>
+                Date Created
+            </th>
+                 @* <th>
+                Url
+            </th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var b in Model)
+        {
+            <tr>
+                <td>
+                    <button class="btn btn-success btn-product" data-productid="@b.Id" id="loadSupplyChainEditor" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+     
+                    <button data-productid="@b.Id" class="btn btn-danger btn-product btnDeleteProduct" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+                  <td>
+                         @Html.DisplayFor(modelItem => b.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => b.DateCreated)
+                </td>
+               @* <td>
+                    @Html.DisplayFor(modelItem => b.Url)
+                </td>
+              *@
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="row text-right">
+    <div class="col-md-12">
+      <a class="btn btn-primary" asp-controller="SupplyChains"
+   asp-action="Add">Add New SupplyChain</a>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/js/supplychains.js"></script>
+}

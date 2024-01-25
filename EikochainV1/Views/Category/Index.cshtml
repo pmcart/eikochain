@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Categories";
+}
+
+
+
+<table class="table table-striped" id="categoryDatatable">
+    <thead>
+        <tr>
+               <th>
+                Actions
+            </th>
+      
+            <th>
+                Name
+            </th>
+         
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var b in Model)
+        {
+            <tr>
+                <td>
+                    <button class="btn btn-success btn-product editCategory" data-catid="@b.Id" data-catvalue="@b.CategoryName" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn btn-danger btn-product deleteCategoryBtn" data-catid="@b.Id" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+             
+                <td>
+                    @Html.DisplayFor(modelItem => b.CategoryName)
+                </td>
+              
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-md-12">
+  @*    <a class="btn btn-primary" asp-controller="Category"
+   asp-action="Add">Add Category</a>*@
+     <button id="addCatBtn" class="btn btn-primary">Add Category</button>
+    </div>
+</div>
+<div class="modal fade" id="categoryEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="exampleModalLabel1">Edit Category</h4>
+            </div>
+            <div id="frmProductUrl">
+                <div class="modal-body">
+                    <input class="form-control" id="categoryInput" value="...">
+                    <div class="form-group" style="text-align:center;">
+                   
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default closeModal" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdateCat">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="categoryAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close closeModal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="exampleModalLabel1">Add Category</h4>
+            </div>
+            <div id="frmProductUrl">
+                <div class="modal-body">
+                    <input class="form-control" id="categoryAddInput" value="">
+                    <div class="form-group" style="text-align:center;">
+                   
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default closeModal" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnConfirmCat">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="~/js/category.js?version=@DateTime.Now"></script>
+}
+

@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Eikochain";
+}
+@{
+    Layout = "_LayoutIFrame";
+}
+@model EikochainV1.Models.SupplyChain
+@section Styles
+{
+     <link rel="stylesheet" href="~/css/editor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/js/thirdparty/grapick/grapick.css" />
+      <link rel="stylesheet" href="~/js/thirdparty/fontselector/jquery.fontselect.css" />
+      <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/huebee@2/dist/huebee.min.css">
+}
+
+<style>
+    .col-md-3{
+        flex: 0 0 auto;
+    width: 25%;
+    }
+    .col-md-9{
+            flex: 0 0 auto ;
+    width: 75%;
+    overflow-x:hidden;
+    overflow-y: hidden;
+    border: none;
+    }
+
+    li{
+        text-align: justify;
+    }
+</style>
+<div >
+
+    @if(@Model != null)
+    {
+           <input type="hidden" id="SupplyChainId" value="@Model.Id" />
+    <input type="hidden" id="ActiveEndpoint" value="1" />
+    <input type="hidden" id="SupplyChainData" value="@Model.SupplyChainData" />
+
+   <div id="previewModalContent" class="row" style="border-radius: 0px;width: 700px; min-height: 500px;">
+        
+    </div>
+    }
+    else
+    {
+
+   <div id="previewModalContent" class="row" style="border-radius: 0px;width: 700px; min-height: 500px;">
+        <h1>No Supply Chain has been created for this product</h1>
+    </div>
+    }
+ 
+@section Scripts
+{
+           <script src="~/js/iframeview.js"></script>
+}
+</div>

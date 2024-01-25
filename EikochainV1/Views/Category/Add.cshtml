@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Add New Category";
+}
+
+<div class="row text-center">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-wrapper" aria-expanded="true">
+                <div class="panel-body">
+                    <div id="NewForm">
+                        <div class="form-body">
+                            <h3 class="box-title">Add New Category</h3>
+                            <hr>
+
+                        </div>
+                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                                <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Category Name</label>
+                                        <input type="text" id="CategoryName" name="CategoryName" class="form-control" placeholder="..." value="">
+                                    </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-success" id="jssaveCategory" data-isaddnew="false"> <i class="fa fa-check"></i> Save</button>
+                                            <button class="btn btn-info" id="jssaveProduct" data-isaddnew="true"> <i class="fa fa-check"></i> Save & Add another</button>
+                                        <a href="~/Category" type="button" class="btn btn-default" id="Cancel">Cancel</a>
+                                    </div>
+                                </div>
+                   
+                            </div>
+</div>
+<!--row -->
+<input type="hidden" id="hdnCreateNewCategory" value="@Url.Action("Add","Category")" />
+@section Scripts
+{
+    <script src="~/js/category.js?version=@DateTime.Now"></script>
+}

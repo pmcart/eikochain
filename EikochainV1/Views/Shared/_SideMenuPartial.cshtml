@@ -1,0 +1,110 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+<nav id="sidebarMenu" class="col-md-2 col-lg-2 d-md-block sidebar collapse">
+    <div class="position-sticky pt-3">
+
+        @if(ViewBag.Logo != null){            
+            <img id="sidemenuLogo" src="@ViewBag.Logo" />
+        
+        }
+        else {
+            <img id="sideMenuLogoDefault" src="~/eikochainlogo3.png" />
+        }        
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link side-menu" aria-current="page" href="/">
+                    <i class="fa fa-home"></i>
+                    Home
+                </a>
+            </li>
+           @* <li class="nav-item">
+                <a class="nav-link side-menu" href="/">
+                 <i class="fa-solid fa-toolbox"></i>
+                    Optimize
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link side-menu" href="/">
+                   <i class="fa-solid fa-calculator"></i>
+                    Calculate
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link side-menu" href="/">
+                <i class="fa-solid fa-plus-minus"></i>
+                    Offset
+                </a>
+            </li>*@
+            <li class="nav-item">
+                <a class="nav-link side-menu" href="/products">
+                   <i class="fa-solid fa-tag"></i>
+                    Products
+                </a>
+            </li>
+          <li class="nav-item">
+                <a class="nav-link side-menu" href="/supplychains">
+                    <i class="fa-solid fa-link"></i>
+                    Supply Chains
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link side-menu" href="/QrCodes">
+                    <i class="fa-solid fa-qrcode"></i>
+                    Qr Codes
+                </a>
+            </li>
+            @* <li><a class="nav-link side-menu" href="/QrCodes"><i class="fa-solid fa-qrcode"></i> QR Codes </a></li>*@
+            @*<li class="nav-item">
+                <a class="nav-link side-menu collapsed" data-bs-toggle="collapse" data-bs-target="#menu_item1" href="#" aria-expanded="false">
+                  <i class="fa-solid fa-gear"></i>
+                    Supply Chains <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul id="menu_item1" class="submenu collapse" data-bs-parent="#nav_accordion" style="list-style:none !important;">
+                    <li><a class="nav-link side-menu" href="/QrCodes"><i class="fa-solid fa-qrcode"></i> QR Codes </a></li>
+                   
+                </ul>
+
+            </li>*@
+           @* <li class="nav-item">
+                <a class="nav-link side-menu" href="/category">
+                  <i class="fa-solid fa-folder-tree"></i>
+                    Categories
+                </a>
+            </li>*@
+            <li class="nav-item">
+                <a class="nav-link side-menu" href="/integrations">
+               <i class="fa-solid fa-network-wired"></i>
+                    Integrations
+                </a>
+            </li>
+        @*      <li class="nav-item">
+                <a class="nav-link side-menu" href="/offset">
+            <i class="fa-solid fa-seedling"></i>
+                    Offsetting
+                </a>
+            </li>*@
+            @* <li class="nav-item">
+                <a class="nav-link" href="/admin">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                Admin
+                </a>
+                </li>*@
+            @*<li class="nav-item">
+                <a class="nav-link side-menu collapsed" data-bs-toggle="collapse" data-bs-target="#menu_item1" href="#" aria-expanded="false">
+                  <i class="fa-solid fa-gear"></i>
+                    Admin <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul id="menu_item1" class="submenu collapse" data-bs-parent="#nav_accordion" style="list-style:none !important;">
+                    <li><a class="nav-link side-menu" href="/Users"><i class="fa-solid fa-user"></i> Users </a></li>
+                    <li><a class="nav-link side-menu" href="/Settings"><i class="fa-solid fa-wrench"></i> Settings </a></li>
+                </ul>
+
+            </li>*@
+        </ul>
+
+    </div>
+      @if(ViewBag.Logo != null){    
+              <img id="sideMenuEikoLogo" src="~/eikochainlogo1.png" />
+      }
+</nav>

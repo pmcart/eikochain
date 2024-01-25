@@ -1,0 +1,403 @@
+﻿@model IEnumerable<SupplyChain>
+@using System.Text.RegularExpressions
+@using Newtonsoft.Json.Linq;
+@using Newtonsoft.Json;
+@{
+    ViewData["Title"] = "Dashboard";
+
+    var totalViews = 0;
+
+    @foreach(var b in Model)
+    {
+        totalViews += b.QrViews + b.WebsiteViews;
+    }
+
+    var i = 0;
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+
+<script>
+jQuery(document).ready(function($) {
+  $('.counter').counterUp({
+    delay: 30,
+    time: 1500,
+  });
+});
+
+$(document).ready(function() {
+
+    $('#dashDatatable').DataTable({
+        "dom": "t"
+    });
+});
+</script>
+
+<style>
+table.dataTable.no-footer {
+    border-bottom: none;
+}
+
+#dashDatatable td {
+    font-size: calc(1rem  + .2vw);
+}
+
+#dashDatatable th {
+    font-size: calc(1rem  + .3vw);
+    letter-spacing: 1.5px;
+}
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <main class="pt-4">          
+                <section>
+                    <div class="row">
+                        <div class="col-md-4 col-3 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between px-md-1">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-shopping-bag text-warning fa-3x"></i>
+                                        </div>
+                                        <div class="text-end">
+                                            <h3 class="counter fw-bold text-warning" style="font-size: calc(1.325rem + .9vw); letter-spacing: normal;">@ViewBag.prodCount</h3>
+                                            <p class="mb-0 fw-bold" style="letter-spacing: .5px;">Products with Eikochain</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-3 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between px-md-1">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-truck text-primary fa-3x"></i>
+                                        </div>
+                                        <div class="text-end">
+                                            <h3 class="counter fw-bold text-primary" style="font-size: calc(1.325rem + .9vw); letter-spacing: normal;">@ViewBag.scCount</h3>
+                                            <p class="mb-0 fw-bold" style="letter-spacing: .5px;">Supply Chains</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-3 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between px-md-1">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-eye text-info fa-3x"></i>
+                                        </div>
+                                        <div class="text-end">
+                                            <h3 class="counter fw-bold text-info" style="font-size: calc(1.325rem + .9vw); letter-spacing: normal;">@totalViews</h3>
+                                            <p class="mb-0 fw-bold" style="letter-spacing: .5px;">Supply Chain Views</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./ row -->
+                    <div class="row my-5">
+                        <div class="col-12">
+                            <table class="table table-sm" id="dashDatatable">
+                              <thead style="background-color: #04AA6D; color: #ffffff;">
+                                <tr>
+                                  <th scope="col" class="px-2 py-2 fw-bold" style="border-radius: .5rem 0 0 0;">#</th>
+                                  <th scope="col" class="px-2 py-2 fw-bold">Supply Chain</th>
+                                  <th scope="col" class="px-2 py-2 fw-bold">Stage / Step</th>
+                                  <th scope="col" class="px-2 py-2 fw-bold" style="border-radius: 0 .5rem 0 0;">Views</th>
+                                </tr>
+                              </thead>
+                              <tbody style="box-shadow: 0 1px 9px 0px rgba(0, 0, 0, 0.28);">
+                                @foreach(var b in Model)
+                                {
+                                    i++;
+                                    <tr>
+                                        <td scope="row">@i</td>
+                                        <td class="fw-bold">
+                                            @Html.DisplayFor(modelItem => b.Title)                                            
+                                        </td>
+                                        <!--Step titles-->
+                                        <td>
+                                            @*@{
+                                                var steps = new List<string>();
+                                                var views = new List<string>();
+
+                                                try{
+                                                    dynamic json = JsonConvert.DeserializeObject(b.Steps);
+
+                                                    foreach (JObject jObject in json)
+                                                    {
+                                                        steps.Add($"{(string)jObject["title"]}");
+                                                        //var view = ((int)jObject["webClicks"] == null ? 0 : (int)jObject["webClicks"]);
+                                                        try
+                                                        {
+                                                            views.Add($"{(int)jObject["webClicks"]}"); 
+                                                        }
+                                                        catch(Exception e)
+                                                        {
+                                                            views.Add("0"); 
+                                                        }                                                                                                       
+                                                    }
+                                                } catch(Exception e)
+                                                {
+                                                    
+                                                } 
+                                                } 
+                                            *@
+
+                                            <span class="fw-bold">Unique sessions:</span>
+                                            <!--add empty accordian to move with opening step view accordian --> 
+                                            <div id="supplychain@(i)" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionsc@(i)">
+                                                <div class="accordion-body" style="padding: 0 5px;">                                                    
+                                                <br>                                                    
+                                                </div>
+                                            </div>
+                                            <br>
+
+                                            @foreach(var c in b.steps)
+                                            {          
+                                                @c.StepTitle;                                                
+                                                        
+                                                    <div id="step@(i)@(c.StepId)" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionstep@(i)@(c.StepId)">
+                                                        <div class="accordion-body" style="padding: 0px;">                                                            
+                                                            <br>
+                                                        </div>
+                                                    </div>
+                                                <br />                                                 
+                                            }
+                                            <span>@(b.steps.Count == 0 ? "No steps" : "")</span>
+                                        </td>
+                                        <td>
+                                            <div class="accordion accordion-flush" id="accordionsc@(i)">
+                                              <div class="@*accordion-item*@">
+                                                <div class="accordion-header" id="headingOne">
+                                                  <span class="accordion-button collapsed fw-bold" style="font-size: calc(1rem + .2vw); padding: 0; padding-right: 10px; box-shadow: none; color: #212529;" data-bs-toggle="collapse" data-bs-target="#supplychain@(i)" aria-expanded="true" aria-controls="supplychain@(i)">
+                                                    @(b.WebsiteViews + b.QrViews)
+                                                  </span>
+                                                </div>
+                                                <div id="supplychain@(i)" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionsc@(i)">
+                                                  <div class="accordion-body" style="padding: 0;">
+                                                    Website @(b.WebsiteViews)
+                                                    <br>
+                                                    Qr Code @(b.QrViews) <!--b.QrViews == null ? "0" : b.QrViews-->                                            
+                                                    <br>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                                                                 
+                                            @foreach(var c in b.steps)
+                                            {
+                                                <div class="accordion accordion-flush" id="accordionstep@(i)@(c.StepId)">
+                                                  <div class="@*accordion-item*@">
+                                                    <div class="accordion-header" id="headingOne">
+                                                      <span class="accordion-button collapsed fw-bold" style="font-size: calc(1rem + .2vw); padding: 0; padding-right: 10px; box-shadow: none; color: #212529;" data-bs-toggle="collapse" data-bs-target="#step@(i)@(c.StepId)" aria-expanded="true" aria-controls="supplychain@(i)">
+                                                        @(c.WebsiteClicks + c.QrClicks)
+                                                      </span>
+                                                    </div>
+                                                    <div id="step@(i)@(c.StepId)" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionstep@(i)@(c.StepId)">
+                                                      <div class="accordion-body" style="padding: 0;">
+                                                        Website @(c.WebsiteClicks)
+                                                        <br>
+                                                        Qr Code @(c.QrClicks)                                         
+                                                        <br>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>                                                                                          
+                                            }
+                                        </td>                                        
+                                    </tr>
+                                }
+                              </tbody>
+                            </table>
+                        </div>      
+                    </div>
+                </section>
+                <!--Section: Minimal statistics cards-->
+                @*<section>
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between px-md-1">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-smog text-info fa-3x"></i>
+                                        </div>
+                                        <div class="text-end">
+                                            <h3>9</h3>
+                                            <p class="mb-0">Emission Sources</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between px-md-1">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-shopping-bag text-warning fa-3x"></i>
+                                        </div>
+                                        <div class="text-end">
+                                            <h3>34</h3>
+                                            <p class="mb-0">Products with Eikochain</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between px-md-1">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-chart-line text-success fa-3x"></i>
+                                        </div>
+                                        <div class="text-end">
+                                            <h3>21.89 %</h3>
+                                            <p class="mb-0">Offset Increase</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between px-md-1">
+                                        <div class="align-self-center">
+                                            <i class="fas fa-map-marker-alt text-danger fa-3x"></i>
+                                        </div>
+                                        <div class="text-end">
+                                            <h3>1254</h3>
+                                            <p class="mb-0">Supply Chain Views</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between px-md-1">
+                                        <div>
+                                            <h3 class="text-danger">4</h3>
+                                            <p class="mb-0">Carbon Offsets Purchased</p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-leaf text-danger fa-3x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between px-md-1">
+                                        <div>
+                                            <h3 class="text-success">3</h3>
+                                            <p class="mb-0">Admins</p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="far fa-user text-success fa-3x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between px-md-1">
+                                        <div>
+                                            <h3 class="text-warning">7</h3>
+                                            <p class="mb-0">Reports Generated</p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-chart-pie text-warning fa-3x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between px-md-1">
+                                        <div>
+                                            <h3 class="text-info">1</h3>
+                                            <p class="mb-0">Support Tickets Raised</p>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="far fa-life-ring text-info fa-3x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               
+                </section>
+                <!--Section: Minimal statistics cards-->
+                <!--Section: Statistics with subtitles-->
+                <section>
+           
+                    <div class="row">
+                        <div class="col-xl-6 col-md-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between p-md-1">
+                                        <div class="d-flex flex-row">
+                                            <div class="align-self-center">
+                                                <h2 class="h1 mb-0 me-4">10mto</h2>
+                                            </div>
+                                            <div>
+                                                <h4>Total Emissions</h4>
+                                                <p class="mb-0">Generated</p>
+                                            </div>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="far fa-heart text-danger fa-3x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between p-md-1">
+                                        <div class="d-flex flex-row">
+                                            <div class="align-self-center">
+                                                <h2 class="h1 mb-0 me-4">$3,600.00</h2>
+                                            </div>
+                                            <div>
+                                                <h4>Total Offset</h4>
+                                                <p class="mb-0">Investment</p>
+                                            </div>
+                                        </div>
+                                        <div class="align-self-center">
+                                            <i class="fas fa-wallet text-success fa-3x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>*@
+                <!--Section: Statistics with subtitles-->
+            
+        </main>
+    </div>
+</div>
+

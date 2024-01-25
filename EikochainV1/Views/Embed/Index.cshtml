@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Generate Embed Code";
+}
+<style>
+       #eikochainContainer .eikochainEmbedBtn {
+           height:60px;
+        width:100%;
+        line-height: 1.5;
+        padding: 0.5rem 1.5rem 0.6rem;
+        border: 0;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
+        font-family: Lato,sans-serif;
+        border-radius: 5rem;
+        text-transform: none;
+        font-size: 1.075rem;
+        font-weight: 700;
+        background-color: #FDF9F0;
+        color: #174C4F;
+        letter-spacing: 1px;
+        margin-top:10px;
+    }
+    #eikochainContainer button {
+        cursor: pointer;
+    }
+    #eikochainContainer .eikochainEmbedBtn:focus:not(:focus-visible) {
+        outline: 0;
+    }
+    #eikochainContainer #eikochainEmbedBtnLogo {
+        vertical-align: middle;
+        width:100px;
+        display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:0px !important;
+    margin-bottom:0px !important;
+    }
+    #eikochainContainer{
+        width: 100%;
+    }
+
+    #eikochainContainer .eikochainTextLine{
+        font-size:10px;
+    display: block;
+    margin-top: -5px;
+    }
+    
+</style>
+<div class="row">
+    <div class="col-md-5">
+        <h5>Your Embed Code</h5>
+        <input id="embedCodeInput" class="form-control" value="" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+         <div id="extContainer">
+          @Html.Raw(ViewBag.ExtHtml)
+      </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="EmbedPageModal" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+             @*   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>*@
+                <h4 class="modal-title" id="exampleModalLabel1">Generate an embed code</h4>
+                 
+            </div>
+           
+        <div class="modal-body">
+         <p>You can select an element on the page where the Eikochain button will be inserted.  </p>
+           <p>This will generate a code which you can insert in the theme liquid template of your Shopify Store.</p>
+             <div class="text-center">
+                 <button id="modalOkBtn" class="btn btn-primary">Ok</button>
+             </div>
+       </div>
+        
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="~/js/embedpage.js?version=@DateTime.Now"></script>
+}

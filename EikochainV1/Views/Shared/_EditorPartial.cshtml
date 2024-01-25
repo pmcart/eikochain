@@ -1,0 +1,516 @@
+﻿    <div class="col-md-2 shadow p-3 mb-5 bg-white rounded">
+        <div class="editor-menu">
+            <div class="row editor-menu-row">
+                <button id="saveBtn" type="button" class="btn btn-sm btn-outline-primary" data-mdb-ripple-color="dark">Save
+                    <div style="display:none;" id="saveBtnLoadSpinner" class="lds-ring"><div></div><div></div><div></div><div></div></div>
+
+                </button>
+                <button id="previewBtn" type="button" class="btn btn-sm btn-outline-secondary " data-mdb-ripple-color="dark">Preview</button>
+                
+                <button id="copyUrlBtn" class="btn btn-sm btn-success">Copy URL</button>
+                <button id="generateQrBtn" class="btn btn-sm btn-success">Generate QR</button>
+                <div class="text-start col-md-6" style="padding: 0px;">
+                   <button id="undoBtn" class="btn btn-sm btn-danger" style="width: 96%;">Undo</button>
+                </div>
+                <div class="text-end col-md-6" style="padding: 0px">
+                    <button id="redoBtn" class="btn btn-sm btn-primary" style="width: 96%;">Redo</button>
+                </div>
+            </div>
+     
+            <div class="row editor-menu-row">
+                <div class="col-md-6" style="padding: 0px">
+                    <button id="btnAddStep" type="button" class="btn btn-primary">
+                        <i class="far fa-plus-square editor-menu-action"></i>
+                    </button>
+                    <p>Add Step</p>
+                     </div>
+                     <div class="col-md-6 " style="padding: 0px">
+                    <button id="btnAddRow" type="button" class="btn btn-primary" disabled>
+                        <i class="fa-regular fa-square-full editor-menu-action"></i>
+                    </button>
+                    <p>Add Section</p>
+                </div>
+            </div>             
+            @*<div class="row editor-menu-row ">
+                <div class="col-md-12">
+                    <button id="btnAddImage" type="button" class="btn btn-primary">
+                        <i class="far fa-images editor-menu-action"></i>
+                    </button>
+                    <p>   Add New Image</p>
+                </div>
+
+
+            </div>
+            <div class="row editor-menu-row ">
+
+
+                <div class="col-md-12">
+                    <button id="btnAddText" type="button" class="btn btn-primary">
+                        <i class="fas fa-paragraph editor-menu-action"></i>
+                    </button>
+                    <p>  Add New Text</p>
+                </div>
+
+
+            </div>
+            <div class="row editor-menu-row ">
+                <div class="col-md-12">
+                    <button id="btnAddVideo" type="button" class="btn btn-primary">
+                        <i class="fas fa-video editor-menu-action"></i>
+                    </button>
+                    <p>Add New Video</p>
+                </div>
+
+
+            </div>*@
+            <div class="row editor-menu-row ">
+                <div class="col-md-6 " style="padding: 0px">
+                    <button id="btnAddImageLogo" type="button" class="btn btn-primary">
+                        <i class="far fa-compass editor-menu-action"></i>
+                    </button>
+                    <p>Add Logo</p>
+                </div>
+          
+                <div class="col-md-6 " style="padding: 0px">
+                    <button id="btnChangeColors" type="button" class="btn btn-primary">
+                        <i class="fa-solid fa-palette editor-menu-action"></i>
+                    </button>
+                    <p>Edit Menu</p>
+                </div>
+
+
+            </div>
+
+        </div>
+      
+    </div>
+
+    <div class="col-md-10" id="mainContainer">
+        <div class="form-group col-md-6">
+            <label for="title">Supply Chain Title:</label>
+             <i class="fas fa-edit title-text-edit" id="editTitleStyle"></i>
+            <input type="text" class="form-control" id="title" value="@Model.Title">            
+        </div>
+    <br />
+    <div class="row" id="mainBodySection">
+        <div class="col-md-3 stepsContainerSection stepsContainerSide" id="stepsContainerSide">
+            <img id="stepContainerLogo" src="/eikochainlogo3.png" class="step-img" />
+            <ul class="nav nav-tabs" id="stepTabs" role="tablist">
+            </ul>
+            
+        </div>
+        
+         <div style="display:none;" class="col-md-9 stepsContainerSection stepsContainerMain" id="stepsContainerMain">
+                  <span id="titleText" class="title-text">@Model.Title</span>
+            <div class="tab-content" id="tabBodyContainer">
+                <div id="stepContainer" class="col-md-9">
+               
+          @*  <div class="row stepContainerRow resizableRow">
+             <div class="col-md-3 stepContainerCol resizableCol"></div>
+               <div class="col-md-3 stepContainerCol resizableCol"></div>
+            </div>*@
+
+        </div>
+            </div>
+            </div>
+    </div>
+
+
+<!-- Tab panes -->
+
+
+</div>
+
+<div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">                
+                <h4 class="modal-title" id="exampleModalLabel1">QR Code</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="frmProductUrl">
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" id="UrlProductID" name="ProductID">
+                    <div class="form-group" style="text-align:center;">
+                        <img id="imgQrCode" width="200" height="200" alt="qr code" />
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnPreviewQR">Preview</button>
+                    <a class="btn btn-success" id="downloadQrCode" download="Eikochain QR - @(Model.Title).png" role="button"><i class="fas fa-download"></i></a>                       
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal  bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            @*<div class="modal-header">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+                </div>*@
+            <div class="modal-body">
+                <textarea class='form-control fixborder' id="endpointTexteditor" name='postDesc[]' placeholder='File description' style="width:100%"></textarea>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect text-left" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary waves-effect text-left jsAddText">Add</button>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="addStepModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">                
+                <h4 class="modal-title" id="exampleModalLabel1">New Step</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label">Step name:</label>
+                    <input type="text" id="newStepName" class="form-control" name="StepName">
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="btnConfirmNewStep">Add</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Edit Item</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="editItemSelect" id="editSelectLabel" class="form-label">Change Item Type</label>
+                <select id="editItemSelect" class="form-select" aria-label="Default select example">
+                  <option value="1">Text</option>
+                  <option value="2">Image</option>
+                  <option value="3">Video</option>
+                </select>
+                <br />
+
+                <div id="textEditorView" class="modalEditorView">
+                       <div id="summernote"></div>
+                </div>
+                 <div id="imageEditorView" class="modalEditorView text-center">
+                     <img id="imageEditorBox" style="width: 90%;" class="mb-3 border-dark border modalEditorView" />
+
+                    <button id="btnAddImage" type="button" class="btnAddImage btn btn-primary">
+                        <i class="far fa-image editor-menu-action"></i>&nbsp; Upload new Image
+                    </button>
+                </div>
+                <div id="videoEditorView" class="modalEditorView text-center">
+                    <video controls id="videoEditorBox" style="width: 90%;" class="mb-3 border border-dark loadvideo step-video modalEditorView">
+                        <source type="video/mp4" />
+                    </video>
+
+                    <iframe id="ytvideoEditorBox" style="width: 90%; height: 200px; object-fit: contain;" title="YouTube video player" 
+                        class="mb-3 loadvideo step-video modalEditorView ytvideoEditorBox" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen frameborder="0" >
+                    </iframe>
+
+                    <button id="btnAddVideo" type="button" class="btnAddVideo btn btn-primary">
+                        <i class="fas fa-video editor-menu-action"></i>&nbsp; Upload new Video
+                    </button>
+                    <button id="btnAddYTVideo" type="button" class="btnAddYTVideo btn btn-danger">
+                        <i class="fab fa-youtube editor-menu-action"></i>&nbsp; Embed youtube Video
+                    </button>
+
+                    <div id="ytvideoEditorView" class="mt-3 ytvideoEditorView modalEditorView">
+                        <input id="ytVideoUrl" style="width: 74%; display: inline;" class="form-control" autocomplete="off" placeholder="Youtube Url or Video Id"/>                    
+                        <button type="button" style="width: 25%;" class="btn btn-success btnPreYTVideo"><i class="fa-solid fa-check text-white"></i> Upload</button>     
+                    </div>
+                </div>
+                
+                    <div id="tabEditorView" class="modalEditorView">
+                        <label for="tabNewTitle" class="form-label">Edit Menu Title</label>
+                        <input id="tabNewTitle" class="form-control" />
+
+                          <div class="row editor-menu-row ">
+                            <div class="col-md-12">
+
+              @*                  <div id="pickerTitle"></div>
+                                                    <p>Title Color</p>*@
+                            </div>
+                        </div>
+                </div>
+                 <div id="titleEditorView" class="modalEditorView">
+                          <div class="row editor-menu-row ">
+                            <div class="col-md-12">
+                                <div id="summernoteEditTitle"></div>
+                            </div>
+                        </div>
+                </div>
+             
+            </div>
+            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="btnDeleteItem">Delete Item</button>
+                <button type="submit" class="btn btn-primary" id="btnUpdateItem">
+                    <span class="spinner-border spinner-border-sm" style="display: none;" role="status" aria-hidden="true"></span> Update
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">                
+                <h4 class="modal-title" id="exampleModalLabel1">Add Item</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="addItemSelect" id="addSelectLabel" class="form-label">Change Item Type</label>
+                <select id="addItemSelect" class="form-select" aria-label="Default select example">
+                 <option value="0">Select an Item type to Add...</option>
+                    <option value="1">Text</option>
+                  <option value="2">Image</option>
+                  <option value="3">Video</option>
+                </select>
+                <br />
+
+                <div id="addtextEditorView" class="modalEditorView">
+                       <div id="summernoteAdd"></div>
+                </div>
+                <div id="addimageEditorView" class="modalEditorView text-center">
+                    <img id="addimageEditorBox" style="width: 90%;" class="mb-3 border border-dark modalEditorView"/>
+                    
+                    <button id="btnAddImage" type="button" class="btnAddImage btn btn-primary" >
+                        <i class="far fa-image editor-menu-action"></i>&nbsp; Upload new Image
+                    </button>                    
+                </div>
+                <div id="addvideoEditorView" class="modalEditorView text-center">
+                    <video controls style="width: 90%;" id="addvideoEditorBox" class=" mb-3 border-light loadvideo step-video modalEditorView">
+                        <source type="video/mp4" />
+                    </video>
+                    @*display: block; margin-right:auto; margin-left: auto;*@
+                    <iframe id="ytvideoEditorBox" style="width: 90%; height: 200px; object-fit: contain;" title="YouTube video player" 
+                            class="mb-3 loadvideo step-video modalEditorView ytvideoEditorBox" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen frameborder="0">
+                    </iframe>                   
+                    
+                    <button id="btnAddVideo" type="button" class="btnAddVideo btn btn-primary">
+                        <i class="fas fa-video editor-menu-action"></i>&nbsp; Upload new Video
+                    </button>
+                    <button id="btnAddYTVideo" type="button" class="btnAddYTVideo btn btn-danger">
+                        <i class="fab fa-youtube editor-menu-action"></i>&nbsp; Embed youtube Video
+                    </button>
+
+                    <div id="ytvideoEditorView" class="mt-3 ytvideoEditorView modalEditorView">
+                        <input id="addytVideoUrl" style="width: 74%; display: inline;" class="form-control" autocomplete="off" placeholder="Youtube Url or Video Id"/>                    
+                        <button type="button" style="width: 25%;" class="btn btn-success btnPreYTVideo"> Upload</button>
+                    </div>
+                </div>                
+                <div id="addtabEditorView" class="modalEditorView">
+                    <label for="tabNewTitle" class="form-label">Edit Title</label>
+                    <input id="tabNewTitle" class="form-control" />
+                </div>
+             
+            </div>
+            <div class="modal-footer">
+                                <button id="closeAddItemModal" type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="btnAddElementItem">
+                    <span class="spinner-border spinner-border-sm" style="display: none;" role="status" aria-hidden="true"></span> Add
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="PreviewDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="previewModalContent">
+            <div class="row" id="previewModalRow"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="qrPreviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <iframe id="qrPreviewFrame" height="450" src="/SupplyChains/Preview"></iframe>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editColorsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;"  data-backdrop="false">
+    <div class="modal-dialog modal-editcolors" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+               
+                <div class="row editor-menu-row ">
+                <div class="col-md-12">
+
+                <p>Edit Menu Title Styles</p>
+                <input id="font1" type="text">
+                      <p>Choose Font Style</p>
+                       <input class="color-input" id="colorInput1" value="#FFF" />
+                <p>Choose Font Color</p>
+                  <select id="menuFontSizeSelector" class="form-control">
+                      <option value="6">6</option>
+                            <option value="8">8</option>
+                                  <option value="10">10</option>
+                                        <option value="12">12</option>
+                                              <option value="14">14</option>
+                                                    <option value="16">16</option>
+                                                          <option value="18">18</option>
+                  </select>
+                      <p>Choose Font Size</p>
+                </div>
+            </div>
+
+            <div class="row editor-menu-row ">
+                <div class="col-md-12">
+
+                <input class="color-input" id="colorInput2" value="#FFF" />
+                <p>Choose Background Color</p>
+                </div>
+            </div>
+
+@*
+            <div class="row editor-menu-row ">
+                <div class="col-md-12">
+
+                    <div id="picker"></div>
+                                        <p>Choose Color</p>
+                </div>
+            </div>*@
+
+             <div class="row editor-menu-row ">
+                <div class="col-md-12">
+
+              <div id="gp"></div>
+                 <p>Choose Background Gradient</p>
+                </div>
+            </div>
+
+             <div style="display:none;" class="row editor-menu-row" >
+                <div class="col-md-12">
+                    <button class="btn btn-primary" id="btnSetMenuBg">Choose Background Image</button>
+                </div>
+            </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default closemodal" data-bs-dismiss="modal">Close</button>
+          
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addSectionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Add New Step</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>                
+            </div>
+            <div class="modal-body">
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group">
+                          <label for="titleInput">Title:</label>
+                          <input autocomplete="off" placeholder="Your New Step" type="text" class="form-control" id="titleInput">
+                        </div>
+                    </div>
+                  
+                </div>
+                <br />
+
+                @*<div class="row text-center">
+                    <h3>Choose a layout</h3>
+                    <br />
+                    <div class="col-md-6">
+                        <img id="layout1" class="layout-img" src="~/images/Layout1.png" />
+                    </div>
+                       <div class="col-md-6">
+                        <img id="layout2" class="layout-img" src="~/images/Layout2.png" />
+                    </div>
+                </div>*@
+                   @*<div class="row text-center">
+                    <div class="col-md-6">
+                        <img id="layout3" class="layout-img" src="~/images/Layout3.png" />
+                    </div>
+                       <div class="col-md-6">
+                        <img id="layout4" class="layout-img" src="~/images/Layout4.png" />
+                    </div>
+                </div>*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="btnConfirmNewSection" disabled>Add</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="copyUrlModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Copy Supply Chain Url</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>               
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group">
+                          <label for="titleInput">Url:</label>
+                          <input type="text" class="form-control" id="urlValueInput" readonly>
+                        </div>
+                    </div>                  
+                </div>
+                <br />
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default closemodal" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="btnConfirmCopyUrl">Copy</button>
+                <a class="btn btn-success" target="_blank" id="btnOpenSCUrl"><i class="fa-solid fa-xl fa-arrow-up-right-from-square"></i></a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<input type="file" class="jsfileImage" style="display:none" />
+<input type="file" class="jsfileImageLogo" style="display:none" />
+<input type="file" class="jsfileMenuBg" style="display:none" />
+<form enctype="multipart/form-data">
+    <input type="file" class="jsfileVideo" style="display:none" />
+</form>

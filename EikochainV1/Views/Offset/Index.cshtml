@@ -1,0 +1,346 @@
+﻿@{
+    ViewData["Title"] = "Offset";
+
+    string[][] locationArray = new string[3][];
+
+    locationArray[0] = new string [] { "Europe", "Ireland", "United Kingdom", "Poland" };
+    locationArray[1] = new string[] {"North America"};
+    locationArray[2] = new string[] {"South America"};
+
+}
+<style>
+    figure img{width:100%;max-width:100%;height:auto!important}
+    .post-category{text-transform:uppercase;letter-spacing:.02rem;font-size:.7rem;font-weight:700;color:#aab0bc}
+    .rounded{border-radius:.4rem!important}
+    .rounded img{border-radius:.4rem}
+    .link-dark:hover,.text-reset a:hover,a.text-reset:hover{color:#3f78e0!important}[class*=text-]
+    .link-dark{color:#343f52}
+    .item figure{position:relative}
+    .item figure .item-cart{opacity:0;position:absolute;bottom:-2rem;padding:.8rem;margin:0;left:0;width:100%;height:auto;color:#fff;background:rgba(38,43,50,.8);-webkit-backface-visibility:hidden;backface-visibility:hidden;text-align:center;transition:all .3s ease-in-out;font-size:.85rem;display:flex;align-items:center;justify-content:center;font-weight:700}
+.swiper-slide figure .item-cart i{font-weight:400;margin-right:.25rem;margin-top:-.05rem}
+.item figure .item-cart:hover,.swiper-slide figure .item-cart:hover{background:rgba(38,43,50,.9)}
+.item:hover figure .item-cart,.swiper-slide:hover figure .item-cart{opacity:1;bottom:0}
+</style>
+
+    <!-- .row -->
+    <div class="row">
+
+        <div class="col-md-12 col-xs-12">
+
+            <nav>
+                <div class="nav nav-tabs mb-4" id="nav-tab" role="tablist">
+                    <button class="nav-item nav-link" id="nav-footprint-tab" data-bs-toggle="tab" data-bs-target="#nav-footprint" type="button" role="tab" aria-controls="nav-footprint" aria-selected="true">Your Footprint</button>
+                    <button class="nav-item nav-link active" id="nav-offsets-tab" data-bs-toggle="tab" data-bs-target="#nav-offsets" type="button" role="tab" aria-controls="nav-offsets" aria-selected="false">Offsets</button>
+                    <button class="nav-item nav-link ms-auto" id="navcart-tab" data-bs-toggle="tab" data-bs-target="nav-cart" type="button" role="tab" aria-controls="nav-cart" aria-selected="false"><i class="fas fa-cart-shopping fa-2x"></i></button>                
+                </div>
+            </nav>
+
+            <form class="form-horizontal form-material">
+                <div class="tab-content" id="nav-tabContent" >
+                    
+                    <div class="tab-pane fade " id="nav-footprint" role="tabpanel" aria-labelledby="nav-footprint-tab">                      
+                            
+
+                            
+                    </div>
+
+                    <div class="tab-pane fade show active" id="nav-offsets" role="tabpanel" aria-labelledby="nav-background-tab">                       
+                        <div class="row">
+                            <div class="col-2 border-end">
+                                <h4>Filters</h4>
+                                <input class="btn-small" type="reset" value="Reset">
+                                <hr />
+
+                                <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
+                                  <div class="accordion-item">
+                                    <h2 class="accordion-header" id="typeHeading">
+                                      <button class="accordion-button collapsed" style="padding: 1rem 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#typePanel" aria-expanded="false" aria-controls="typePanel">
+                                        Project type
+                                      </button>
+                                    </h2>
+                                    <div id="typePanel" class="accordion-collapse collapse py-3" aria-labelledby="typeHeading">              
+                                          <div class="form-group form-check">
+                                               <label class="form-check-label" for="type1"><input type="checkbox" class="form-check-input" id="type1"/> Tree Planting</label>
+                                          </div>
+                                        <div class="form-group form-check">
+                                            <label class="form-check-label" for="type2"><input type="checkbox" class="form-check-input" id="type2"/> Clean Energy</label>
+                                        </div>      
+                                        <div class="form-group form-check">
+                                            <label class="form-check-label" for="type2"><input type="checkbox" class="form-check-input" id="type2"/> Natural Restoration</label>
+                                        </div>
+                                    </div>
+                                    <!-- ./ end accordion-collapse -->
+                                  </div>
+                                  <div class="accordion-item">
+                                    <h2 class="accordion-header" id="locHeading">
+                                      <button class="accordion-button collapsed" style="padding: 1rem 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#locPanel" aria-expanded="false" aria-controls="locPanel">
+                                        Location
+                                      </button>
+                                    </h2>
+                                    <div id="locPanel" class="accordion-collapse collapse py-3" aria-labelledby="locHeading">
+                                          <div class="form-group form-check">                                            
+                                            <label class="form-check-label w-100" for="allLoc"><input type="checkbox" class="form-check-input section-check" id="allLoc"/> All</label>
+                                          </div> 
+                                          
+
+                                          <div class="accordion accordion-flush" id="eurAccordion">
+                                              <div class="accordion-item">
+                                                  <h2 class="accordion-header" id="eurHeading">
+                                                    <input type="checkbox" class="form-check-input sub-section-check" id="eurLoc"/> 
+                                                    <button class="accordion-button collapsed py-3" style="padding: 1rem 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#eurPanel" aria-expanded="false" aria-controls="eurPanel">
+                                                        Europe
+                                                    </button>
+                                                  </h2>
+                                                  <div id="eurPanel" class="accordion-collapse collapse" aria-labelledby="eurHeading">
+
+                                                    <div class="form-group form-check">                                                        
+                                                    <label class="form-check-label w-100" for="ireLoc"><input type="checkbox" class="form-check-input" id="ireLoc"/> Ireland</label>
+                                                    </div>
+                                                    <div class="form-group form-check">                                                        
+                                                    <label class="form-check-label w-100" for="ukLoc"><input type="checkbox" class="form-check-input" id="ukLoc"/> United Kingdom</label>
+                                                    </div> 
+                                                    <div class="form-group form-check">                                                        
+                                                    <label class="form-check-label w-100" for="polLoc"><input type="checkbox" class="form-check-input" id="polLoc"/> Poland</label>
+                                                    </div>  
+                                                      
+                                                  </div>                                                  
+                                              </div>
+                                          </div> 
+                                          
+                                          <div class="accordion accordion-flush" id="nUSAAccordion">
+                                              <div class="accordion-item">
+                                                  <h2 class="accordion-header" id="nUSAHeading">                                                    
+                                                    <button class="accordion-button collapsed py-3" style="padding: 1rem 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#nUSAPanel" aria-expanded="false" aria-controls="nUSAPanel">
+                                                        North America
+                                                    </button>
+                                                  </h2>
+                                                  <div id="nUSAPanel" class="accordion-collapse collapse" aria-labelledby="nUSAHeading">                                                   
+                                                  </div>                                                  
+                                              </div>
+                                          </div> 
+
+                                          <div class="accordion accordion-flush" id="sUSAAccordion">
+                                              <div class="accordion-item">
+                                                  <h2 class="accordion-header" id="sUSAHeading">                                                    
+                                                    <button class="accordion-button collapsed py-3" style="padding: 1rem 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#sUSAPanel" aria-expanded="false" aria-controls="sUSAPanel">
+                                                        South America
+                                                    </button>
+                                                  </h2>
+                                                  <div id="sUSAPanel" class="accordion-collapse collapse" aria-labelledby="sUSAHeading">                                                   
+                                                  </div>                                                  
+                                              </div>
+                                          </div> 
+
+                                          <div class="accordion accordion-flush" id="asiaAccordion">
+                                              <div class="accordion-item">
+                                                  <h2 class="accordion-header" id="asiaHeading">                                                    
+                                                    <button class="accordion-button collapsed py-3" style="padding: 1rem 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#asiaPanel" aria-expanded="false" aria-controls="asiaPanel">
+                                                        Asia
+                                                    </button>
+                                                  </h2>
+                                                  <div id="asiaPanel" class="accordion-collapse collapse" aria-labelledby="asiaHeading">                                                   
+                                                  </div>                                                  
+                                              </div>
+                                          </div> 
+                                    </div>
+                                  </div>
+                                  <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                      <button class="accordion-button collapsed" style="padding: 1rem 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#certPanel" aria-expanded="false" aria-controls="certPanel">
+                                        Certification
+                                      </button>
+                                    </h2>
+                                    <div id="certPanel" class="accordion-collapse collapse py-3 " aria-labelledby="panelsStayOpen-headingThree">
+                                      <div class="form-group form-check">                                        
+                                        <label class="form-check-label" for="cert1"><input type="checkbox" class="form-check-input" id="type1"/> Trees</label>
+                                      </div>
+                                      <div class="form-group form-check">                                        
+                                        <label class="form-check-label" for="cert2"><input type="checkbox" class="form-check-input" id="type2"/> More trees</label>
+                                      </div>
+                                    </div>                                    
+                                  </div>
+                                  <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                                      <button class="accordion-button collapsed" style="padding: 1rem 0px;" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                                        Price
+                                      </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                                      <div class="form-group">
+                                        <input type="range" class="form-control-range w-100" min="0" max="1000" id="price" /> <!--use jquery slider for double renges-->
+                                      </div>
+                                    </div>                                    
+                                  </div>
+                                </div>
+                                
+                            </div>
+                            <div class="col-10">
+                                <div class="row align-items-center mb-2 position-relative zindex-1">
+              <div class="col-md-7 col-xl-8 pe-xl-20">
+                <h2 class="display-6 mb-1">Offsetting Projects</h2>
+                <p class="mb-0 text-muted">Showing 1–6 of 30 results</p>
+              </div>
+              <!--/column -->
+              <div class="col-md-5 col-xl-4 ms-md-auto text-md-end mt-5 mt-md-0">
+                <div class="form-select-wrapper">
+                  <select class="form-select">
+                    <option value="popularity">Sort by popularity</option>
+                    <option value="rating">Sort by average rating</option>
+                    <option value="newness">Sort by newness</option>
+                    <option value="price: low to high">Sort by price: low to high</option>
+                    <option value="price: high to low">Sort by price: high to low</option>
+                  </select>
+                </div>
+                <!--/.form-select-wrapper -->
+              </div>
+              <!--/column -->
+            </div>
+            <!--/.row -->
+            <div class="grid grid-view projects-masonry shop">
+              <div class="row gx-md-8 gy-10 gy-md-13 isotope">
+                <div class="project item col-md-6 col-xl-4 mb-3">
+                  <figure class="rounded mb-2">
+                    <img src="images/offset/tree.png" alt="" />
+                    <a class="item-like" href="#" data-bs-toggle="white-tooltip" title="Add to wishlist"><i class="uil uil-heart"></i></a>
+                    <a class="item-view" href="#" data-bs-toggle="white-tooltip" title="Quick view"><i class="uil uil-eye"></i></a>
+                    <a href="#" class="item-cart"><i class="fas fa-shopping-bag"></i>&nbsp; Add to Cart</a>
+                  </figure>
+                  <div class="post-header">
+                    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+                      <div class="post-category text-ash mb-0">Tree Planting</div>
+                      <span class="ratings five"></span>
+                    </div>
+                    <h2 class="post-title h3 fs-22"><a href="./shop-product.html" class="link-dark">Tree Planting</a></h2>
+                    <p class="price"><span class="amount">€55.00 / Tonne</span></p>
+                  </div>
+                  <!-- /.post-header -->
+                </div>
+                <!-- /.item -->
+                <div class="project item col-md-6 col-xl-4 mb-3">
+                  <figure class="rounded mb-2">
+                    <img src="images/offset/solar.png" alt="" />
+                    <a class="item-like" href="#" data-bs-toggle="white-tooltip" title="Add to wishlist"><i class="uil uil-heart"></i></a>
+                    <a class="item-view" href="#" data-bs-toggle="white-tooltip" title="Quick view"><i class="uil uil-eye"></i></a>
+                    <a href="#" class="item-cart"><i class="fas fa-shopping-bag"></i>&nbsp; Add to Cart</a>
+                  </figure>
+                  <div class="post-header">
+                    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+                      <div class="post-category text-ash mb-0">Clean Energy</div>
+                      <span class="ratings four"></span>
+                    </div>
+                    <h2 class="post-title h3 fs-22"><a href="./shop-product.html" class="link-dark">Solar Farm</a></h2>
+                    <p class="price"><span class="amount">€55.00 / Tonne</span></p>
+                  </div>
+                  <!-- /.post-header -->
+                </div>
+                <!-- /.item -->                
+                <div class="project item col-md-6 col-xl-4 mb-3">
+                  <figure class="rounded mb-2">
+                    <img src="images/offset/wind.png" alt="" />
+                    <a class="item-like" href="#" data-bs-toggle="white-tooltip" title="Add to wishlist"><i class="uil uil-heart"></i></a>
+                    <a class="item-view" href="#" data-bs-toggle="white-tooltip" title="Quick view"><i class="uil uil-eye"></i></a>
+                    <a href="#" class="item-cart"><i class="fas fa-shopping-bag"></i>&nbsp; Add to Cart</a>
+                  </figure>
+                  <div class="post-header">
+                    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+                      <div class="post-category text-ash mb-0">Clean Energy</div>
+                      <span class="ratings three"></span>
+                    </div>
+                    <h2 class="post-title h3 fs-22"><a href="./shop-product.html" class="link-dark">Wind Farm</a></h2>
+                    <p class="price"><span class="amount">€55.00 / Tonne</span></p>
+                  </div>
+                  <!-- /.post-header -->
+                </div>
+                <!-- /.item -->
+                <div class="project item col-md-6 col-xl-4 mb-3">
+                  <figure class="rounded mb-2">
+                    <img src="images/offset/farm.png" alt="" />
+                    <a class="item-like" href="#" data-bs-toggle="white-tooltip" title="Add to wishlist"><i class="uil uil-heart"></i></a>
+                    <a class="item-view" href="#" data-bs-toggle="white-tooltip" title="Quick view"><i class="uil uil-eye"></i></a>
+                    <a href="#" class="item-cart"><i class="fas fa-shopping-bag"></i>&nbsp; Add to Cart</a>
+                  </figure>
+                  <div class="post-header">
+                    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+                      <div class="post-category text-ash mb-0">Natural Restoration</div>
+                      <span class="ratings one"></span>
+                    </div>
+                    <h2 class="post-title h3 fs-22"><a href="./shop-product.html" class="link-dark">Sustainable Agriculture</a></h2>
+                    <p class="price"><span class="amount">€65.00 / Tonne</span></p>
+                  </div>
+                  <!-- /.post-header -->
+                </div>
+                <!-- /.item -->                
+                <div class="project item col-md-6 col-xl-4 mb-3">
+                  <figure class="rounded mb-2">
+                    <img src="images/offset/hydro.png" alt="" />
+                    <a class="item-like" href="#" data-bs-toggle="white-tooltip" title="Add to wishlist"><i class="uil uil-heart"></i></a>
+                    <a class="item-view" href="#" data-bs-toggle="white-tooltip" title="Quick view"><i class="uil uil-eye"></i></a>
+                    <a href="#" class="item-cart"><i class="fas fa-shopping-bag"></i>&nbsp; Add to Cart</a>
+                  </figure>
+                  <div class="post-header">
+                    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+                      <div class="post-category text-ash mb-0">Clean Energy</div>
+                      <span class="ratings four"></span>
+                    </div>
+                    <h2 class="post-title h3 fs-22"><a href="./shop-product.html" class="link-dark">Hydroelectric Dam</a></h2>
+                    <p class="price"><span class="amount">€105.00 / Tonne</span></p>
+                  </div>
+                  <!-- /.post-header -->
+                </div>
+                <!-- /.item -->
+                <div class="project item col-md-6 col-xl-4 mb-3">
+                  <figure class="rounded mb-2">
+                    <img src="images/offset/bog.png" alt="" />
+                    <a class="item-like" href="#" data-bs-toggle="white-tooltip" title="Add to wishlist"><i class="uil uil-heart"></i></a>
+                    <a class="item-view" href="#" data-bs-toggle="white-tooltip" title="Quick view"><i class="uil uil-eye"></i></a>
+                    <a href="#" class="item-cart"><i class="fas fa-shopping-bag"></i>&nbsp; Add to Cart</a>
+                  </figure>
+                  <div class="post-header">
+                    <div class="d-flex flex-row align-items-center justify-content-between mb-2">
+                      <div class="post-category text-ash mb-0">Natural Restoration</div>
+                    </div>
+                    <h2 class="post-title h3 fs-22" style="letter-spacing: -.01rem;"><a href="./shop-product.html" class="link-dark">Bog Rewetting</a></h2>
+                    <p class="price"><span class="amount">€35.00 / Tonne</span></p>
+                  </div>
+                  <!-- /.post-header -->
+                </div>
+                <!-- /.item -->                
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.grid -->
+            <nav class="d-flex" aria-label="pagination">
+              <ul class="pagination">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true"><i class="uil uil-arrow-left"></i></span>
+                  </a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true"><i class="uil uil-arrow-right"></i></span>
+                  </a>
+                </li>
+              </ul>
+              <!-- /.pagination -->
+            </nav>
+                            </div>
+                            <!-- /.col-->
+                        </div>
+                         <!-- /.row -->                                        
+                    </div>
+                </div>
+                   
+            </form>            
+        </div>
+        <!-- /.col-->
+    </div>
+    <!-- /.row -->
+
+@section Scripts
+{
+    <script src="~/js/offset.js?version=@DateTime.Now"></script>
+}

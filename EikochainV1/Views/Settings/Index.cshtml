@@ -1,0 +1,149 @@
+﻿@{
+    ViewData["Title"] = "Settings";
+}
+
+<!--<div class="container-fluid">-->
+    <!-- /.row -->
+    <!-- .row -->
+    <div class="row">
+
+        <div class="col-md-12 col-xs-12">
+            @*<div class="white-box">*@
+                @*<ul class="nav nav-tabs tabs customtab">
+
+                        <li class="tab active">
+                            <a href="#settings" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Settings</span> </a>
+                        </li>
+                    </ul>*@
+
+                <h2>Settings</h2>
+
+                <nav>
+                    <div class="nav nav-tabs mb-4" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-logo-tab" data-bs-toggle="tab" data-bs-target="#nav-logo" type="button" role="tab" aria-controls="nav-logo" aria-selected="true">Logo</button>
+                       @* <button class="nav-link" id="nav-background-tab" data-bs-toggle="tab" data-bs-target="#nav-background" type="button" role="tab" aria-controls="nav-background" aria-selected="false">Background Image</button>*@
+                    </div>
+                </nav>
+
+                <form class="form-horizontal form-material">
+                    <div class="tab-content" id="nav-tabContent" >
+                    
+                        <div class="tab-pane fade show active" id="nav-logo" role="tabpanel" aria-labelledby="nav-logo-tab">
+                        
+                            <div class="row">
+                                @*
+                                <div class="col-md-6 text-center">
+                                <div class="form-group">
+                                    <h3>Mini Logo  (32 X 32)px - max</h3>
+                                    <div class="product-img">
+                                        <input type="hidden" id="miniLogoImage" name="miniLogoImage" value=""/>
+                                        @if (ViewBag.Setting != null)
+                                        {
+                                            if (ViewBag.Setting.MiniLogo != null)
+                                            {
+                                                <img id="miniLogo" src="@ViewBag.Setting.MiniLogo" class="JsMiniLogoImage" style="box-sizing: content-box; background-color: #999; padding:10px;width:32px; height:32px">
+                                            }
+                                            else
+                                            {
+                                                <img id="miniLogo" src="" class="JsMiniLogoImage" style="display: none; box-sizing: content-box; background-color: #999; padding:10px; width:32px; height:32px"><br /><br />
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <img id="miniLogo" src="" class="JsMiniLogoImage" style="display: none; box-sizing: content-box; background-color: #999; padding:10px; width:32px; height:32px"><br /><br />
+                                        }
+                                                                                
+                                    </div>  
+                                    
+                                    <label id="addMiniLogoImageBtn" class="fileupload btn btn-info waves-effect waves-light">
+                                        <span><i class="ion-upload m-r-5 far fa-images"></i> Upload Mini Logo</span>                                       
+                                    </label>    
+                                    <input style="display:none;" type="file" class="upload" id="miniLogoUpload">
+
+                                </div>
+                                </div>
+                                *@
+                                <div class="col-md-6 text-center">
+                                <div class="form-group">
+                                    <h3>Logo (130 X 114)px - max</h3>
+                                    <div class="product-img mb-3">
+                                        <input type="hidden" id="logoImageUrl" name="logoImage" value="@ViewBag.Logo" />
+                                        
+                                            @if (ViewBag.Logo != null)
+                                            {
+                                                <img id="Logo" src="@ViewBag.Logo" class="JsLogoImage" style="box-sizing: content-box; border: 5px solid #999; padding: 10px; width: 130px; height: 114px"> 
+                                            }
+                                            else {
+                                                <img id="Logo" src="" class="JsLogoImage" style="display: none; box-sizing: content-box; border: 5px solid #999;  padding: 10px; width: 130px; height: 114px"><br /><br />
+                                            }
+                                                                                                                            
+                                    </div> 
+                                    
+                                    <label for="logoUpload" id="addLogoImageBtn" class="fileupload btn btn-info waves-effect waves-light">
+                                        <span><i class="ion-upload m-r-5 far fa-images editor-menu-action"></i> Upload Logo</span>
+                                    </label>
+                                    <input style="display:none;" type="file" class="upload" id="logoUpload">
+
+                                </div>
+                                </div>
+                                                                                                                           
+                            </div>                            
+
+                        </div>
+                        @*
+                        <div class="tab-pane fade" id="nav-background" role="tabpanel" aria-labelledby="nav-background-tab">
+                            <div class="row">
+                            <div class="col-md-6 text-center">
+                            <div class="form-group">
+                                <h3 class="box-title m-t-20">Background Image</h3>
+                                <div class="product-img">
+                                    <input type="hidden" id="backgroundImage" name="BackgroundImage" />
+                                    @if (ViewBag.Setting != null)
+                                    {
+                                        if(ViewBag.Setting.BackgroundImage != null){
+                                            <img id="Background" src="@ViewBag.Setting.BackgroundImage" class="JsBackgroundImage" style="width:260px;height:220px">
+                                        }
+                                        else {
+                                            <img id="background" src="" class="JsBackgroundImage" style="display: none; width:260px;height:220px"><br /><br />
+                                        }
+                                    }
+                                    else {
+                                        <img id="background" src="" class="JsBackgroundImage" style="display: none; width:260px;height:220px"><br /><br />
+                                    }
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-6 text-center">
+                                    <label id="addBackgroundImageBtn" class="fileupload btn btn-info waves-effect waves-light">
+                                        <span for="backgroundUpload"><i class="ion-upload m-r-5 far fa-images"></i> Upload Background</span>                                        
+                                    </label>
+                                    <input style="display: none;" type="file" class="upload" id="backgroundUpload">  
+                                </div>
+                            </div>                                                        
+                        </div>*@
+                    </div>
+
+                    <hr>
+
+                   <div class="form-actions m-t-40">
+                       <button type="button" disabled class="btn btn-success" id="saveBtn"> <i class="fa fa-check"></i> Save</button>
+                   </div>
+
+                </form>
+            <!--</div>-->
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- ===== Right-Sidebar ===== -->
+    <!-- ===== Right-Sidebar-End ===== -->
+<!--</div>-->
+
+
+@section Scripts
+{
+    <script src="~/js/settings.js?version=@DateTime.Now"></script>
+}

@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Eikochain";
+}
+@{
+    Layout = "_LayoutPreview";
+}
+
+@model EikochainV1.Models.SupplyChain
+@section Styles
+{
+     <link rel="stylesheet" href="~/css/preview.css" asp-append-version="true" />
+ 
+}
+
+<div class="">
+
+    <input type="hidden" id="SupplyChainId" value="@Model.Id" />
+    <input type="hidden" id="ActiveEndpoint" value="1" />
+    <input type="hidden" id="SupplyChainData" value="@Model.CurrentPreviewData" />
+
+    <div class="view-wrapper">
+        <nav id="sidebar">
+        <ul class="nav nav-tabs" id="sidebarUl"></ul>
+        </nav>
+    
+                <i class="fas fa-bars" id="sidebarCollapse"></i>
+         @*       <span>Toggle Sidebar</span>*@
+               <div id="mainBodySection" class="row mainBodySection ">
+    </div>
+    </div>
+ 
+
+</div>
+@section Scripts
+{
+
+    <script src="~/js/mobileview.js"></script>
+              <script src="~/js/mobilemenu.js"></script>
+
+}
